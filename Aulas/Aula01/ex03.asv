@@ -1,0 +1,8 @@
+clc; clear; close all force;
+
+x = 0:0.01:2*pi; % declara o tamanho de eixo x: 0 = num inicial, 0.01 = intervalo entre x's, 2*pi = ultimo valor do eixo x 
+y = sin(x);
+
+plot(x,y)
+
+%%

@@ -1,0 +1,23 @@
+clc; clear; close all force;
+
+N = 1e9;  % dado da entrada
+
+tic
+soma = 0;
+termo = 0;
+sinal = -1;
+for n=0:N 
+    %if mode(n, 100) == 0; 
+     %   n
+    %end
+    
+   % soma = soma + (-1)^n/(2*n+1);
+    sinal = -sinal;
+end
+toc
+pie = 4*soma
+pi
+abs(pie-pi)
+
+%format long
+%[pie pi abs(pie-pi)]
