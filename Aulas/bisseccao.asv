@@ -1,0 +1,40 @@
+function p = bisseccao(f, a, b)
+% Esta função determina uma aproximação para f(p)=0, através
+% do método da bissecção
+% Esta função recebe um ponteiro para a função f (function handle)
+% e os extremos do intervalo [a,b] e retorna a raizp da equação.
+    if(f(a)*f(b) > 0)
+        error('A função nao muda de sinal com os pontos dados')
+    end
+
+    N0 = 1000; % número maximo de interações
+    TOL_fun = 1e-8; % tolerância do processo interativo
+    
+    i = 1; % iterador
+    fa = f(a);
+    encontrou = false; % variável que me diz se encontrou a raiz
+    
+    while (i<= N0)
+       p = (a+b)/2;
+       fp = f(p);
+%       if (fp == 0 || (b-a)/2<TOL)
+       if (abs(fp)<TOL_fun && (b-a)/2<TOL_x)
+           % return; % encerra a função
+           encontrou = true;
+           break;    % encerra o loop
+       end
+       
+       if (fa*fp>0)
+           a = p;
+           fa = fp;
+       else
+           b = p;
+       end
+   
+    end    
+   
+    if(~encontrou)  % ~ = not
+        error('Não encontrou a raiz em %d iterações', N0);
+    end
+
+end
