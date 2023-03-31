@@ -1,0 +1,9 @@
+clc; clear; close all force;
+
+rho = 1.23;
+mu = 1.79e-5;
+D = 0.004;
+V = 40;
+e = 0.0015e-3; % m
+
+Re = rho*V*d/
