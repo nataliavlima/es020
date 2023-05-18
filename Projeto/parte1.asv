@@ -1,0 +1,25 @@
+RA = '185483';
+d = digitosRA(RA);
+[L,Izz,M0] = dados_problema(d);
+P = M0/L;
+
+
+Mz = @(x) P*L - M0 -P*x + M0*sing(x,L/2, 0);
+
+x = [0:0.05:L];
+
+Mz2 = momentoFletor(P,L,M0,x);
+
+
+figure
+fplot(Mz, [0 L], 'b', 'LineWidth',2);
+hold on;
+
+plot(x, Mz2, 'g','LineWidth',1);
+title('Momento Fletor Interno');
+plot(41.5, 9000, 'or', 'LineWidth', 5);
+grid on;
+xlabel('x(m)'); 
+ylabel('Mz(N.m)');
+legend('Mz por Singularidade', 'Mz pela expressão numérica');
+hold off;

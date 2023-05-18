@@ -1,0 +1,25 @@
+RA = '185483';
+d = digitosRA(RA);
+[L,Izz,M0] = dados_problema(d);
+P = M0/L;
+ = 210
+
+v1 = @(x) ((P*L-M0)*(x^2/2)-(P/6)*x.^3+(M0/2)*(sing(x, L/2)).^2)/(E*Izz);
+P1 = 0;
+
+v2 = @(x) ((P*L-M0)*(x.^2/2)-(P/6)*x.^3+(M0/2)*(sing(x, L/2)).^2)/(E*Izz);
+P2 = (1/2)*(M0/L);
+
+v3 = @(x) ((P*L-M0)*(x.^2/2)-(P/6)*x.^3+(M0/2)*(sing(x, L/2)).^2)/(E*Izz);
+P3 = M0/L;
+
+v4 = @(x) ((P*L-M0)*(x.^2/2)-(P/6)*x.^3+(M0/2)*(sing(x, L/2)).^2)/(E*Izz);
+P4 = 2*M0/L;
+
+fplot(v1, [0 L]);
+hold on
+fplot(v2, [0 L]);
+hold on
+fplot(v3, [0 L]);
+hold on
+fplot(v4, [0 L]);
