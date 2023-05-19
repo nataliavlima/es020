@@ -1,6 +1,7 @@
 RA = '185483';
 d = digitosRA(RA);
 [L,Izz,M0] = dados_problema(d);
+
 P = M0/L;
 E = 210e9;
 
@@ -68,3 +69,57 @@ ylabel('y(m)'); % ver unidade
 legend('\sigma_{xx}', 'Location','northwest');
 
 view(2);
+
+%% Parte 2
+v = @(P5) ((P5*L-M0)*(L.^2/2)-(P5/6)*L.^3+(M0/2)*(sing(L, L/2,2)))/(E*Izz);
+
+
+% v = 0 entre P = 236 e 246
+P0 = fzero(v, 246)
+P0b = bisseccao(v,236,246)    % Raiz por bisseccao
+% Usando fzero e bisseccao ele encontrou a mesma raiz
+% Para bisseccao usei 236 e 246 pois plotando v dava para
+% ver que era entre esses numeros que cruzava o eixo x
+
+
+figure;
+fplot(v, [0 2*M0/L]);
+hold on;
+plot(P0,v(P0), 'or');
+%plot(P0b, v(P0b), '^r');
+hold off;
+
+xlabel('P'); 
+ylabel('v'); % ver unidade
+legend('Deflexão', 'Deflexão na extremidade nula',  'Ponto mínimo','Ponto máximo', 'Location','best');
+
+
+%% Deflexao Maxima
+P = M0/L;
+v = @(x) ((P*L-M0)*(x.^2/2)-(P/6)*x.^3+(M0/2)*(sing(x, L/2,2)))/(E*Izz);
+
+x_max = fminbnd(@(x) -v(x), 0, L)
+x_min = fminbnd(v, 0, L)
+
+v_max = v(x_max)
+v_min = v(x_min)
+
+x_nulo = fzero(v, 0)
+v_nulo = v(x_nulo)
+%P0b = bisseccao(v,236,246) 
+
+figure;
+fplot(v, [0 L]);
+hold on;
+plot(x_max, v_max,'or', 'LineWidth', 1);
+plot(x_min, v_min, '^r', 'LineWidth', 1);
+plot(x_nulo, 0, 'xr', 'LineWidth', 1);
+xlabel('x (m)'); 
+ylabel('v'); % ver unidade
+legend('Deflexão', 'Deflexão Máxima',  'Deflexão Mínima','Deflexão Nula','Location','best');
+
+hold off;
+
+%% Parte 4
+
+
