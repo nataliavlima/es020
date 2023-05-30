@@ -25,7 +25,7 @@ function p = bisseccao(f,a,b)
         if (abs(fp)<TOL_fun && (b-a)/2<TOL_x)
             %return; % encerra a função
             encontrou  = true;
-            fprintf('Raiz encontrada após %d iterações\n',i)
+            
             break; % encerra o loop
         end
         i = i+1;

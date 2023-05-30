@@ -95,8 +95,8 @@ legend('Deflexão', 'Deflexão na extremidade nula',  'Ponto mínimo','Ponto má
 
 
 %% Deflexao Maxima
-P = M0/L;
-v = @(x) ((P*L-M0)*(x.^2/2)-(P/6)*x.^3+(M0/2)*(sing(x, L/2,2)))/(E*Izz);
+%P = M0/L;
+v = @(x) ((P0*L-M0)*(x.^2/2)-(P0/6)*x.^3+(M0/2)*(sing(x, L/2,2)))/(E*Izz);
 
 x_max = fminbnd(@(x) -v(x), 0, L)
 x_min = fminbnd(v, 0, L)
@@ -121,5 +121,36 @@ legend('Deflexão', 'Deflexão Máxima',  'Deflexão Mínima','Deflexão Nula','
 hold off;
 
 %% Parte 4
+p = 7850;
+g = 9.81;
 
+w0 = p*b*h*g;
+P = M0/L;
 
+A = [L        1   0
+    (3*L/2)   1   0
+    1         0   1];
+
+% Para P = M0/L:
+b1 = [((L^2/2)*w0-M0)  ((3*L/2)^2/2*w0 - M0 -P*(3*L/2-L))  (3*L/2*w0 -P) ].';
+r1 = A\b1
+
+% Para w0 = 0
+w0 = 0;
+b2 = [((L^2/2)*w0-M0)  ((3*L/2)^2/2*w0 - M0 -P*(3*L/2-L))  (3*L/2*w0 -P) ].';
+r2 = A\b2
+
+% Para w0 = 0 e P = 0
+P = 0;
+
+b3 = [((L^2/2)*w0-M0)  ((3*L/2)^2/2*w0 - M0 -P*(3*L/2-L))  (3*L/2*w0 -P) ].';
+r3 = A\b3
+
+% Para w0 = 0, M0 = 0 e P = M0/L;
+P = M0/L;
+M0 = 0;
+
+b4 = [0  ( -P*(3*L/2-L))  ( -P) ].';
+r4 = A\b4
+
+T = table(r1, r2, r3, r4)
