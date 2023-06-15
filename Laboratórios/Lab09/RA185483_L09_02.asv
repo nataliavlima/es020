@@ -1,0 +1,24 @@
+function [t, y] = RA185483_L09_02(A0,T,n)
+
+%t = 0:T:4*T
+
+% an = @(n) 4*A0/((2*n-1)*pi);
+% wn = @(n) (2*pi*(2*n-1))/T;
+% 
+% fx = @(t,n) sum( an(1:n).*sin(wn(1:n).*t) )
+% 
+% % n = [1 2 3 4 5 6 7 8 9 ];
+% figure; hold on;
+% t = linspace(0,1,0.25);
+% %fplot(fx,[min(t,n) max(t,n)],'--','linewidth',2)
+% 
+t = [0:0.01:4*T]'
+for j=1:n
+    % y = zeros(size(t));
+    % for i=1:length(t)
+    %     y(i) = fx(t(i),n(j));
+    % end
+    y = sum( 4.*A0/((2.*j-1)*pi).*sin((2.*pi.*(2.*n-1))/T.*t) )
+end
+
+
